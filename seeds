@@ -1,0 +1,28 @@
+sudo -u postgres psql
+\c practice
+
+CREATE DATABASE practice
+
+CREATE TABLE products(
+   id INT,
+   name VARCHAR(50),
+   price INT,
+   onSale BOOLEAN
+);
+\d to list all tables
+
+CREATE TABLE restaurants(
+   id BIGSERIAL NOT NULL PRIMARY KEY,
+   name VARCHAR(50) NOT NULL,
+   location VARCHAR(50) NOT NULL,
+   price_range INT NOT NULL check(price_range >=1 and price_range <=5)
+);
+
+INSERT INTO restaurants(name, location, price_range) VALUES ('McDonalds', 'New York', 3);
+
+
+INSERT INTO restaurants(name, location, price_range) VALUES ('Yakisoba', 'Athlone', 5) RETURNING *;
+
+UPDATE restaurants SET name = 'Red Lobster', location='Dallas', price_range=5 where id = 4;
+
+DELETE FROM restaurants WHERE id=4;
