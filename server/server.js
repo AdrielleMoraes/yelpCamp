@@ -1,16 +1,17 @@
 const express = require("express");
 const db = require("./db");
-
+const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
+
 
 app.get("/api/v1/restaurants", async(req,res)=>{
    try{
       const { rows } = await db.query('SELECT * FROM restaurants');
-
       res.status(200).json({
          status:"success",
          count: rows.length,
@@ -58,7 +59,6 @@ app.get("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
 });
 
 app.post("/api/v1/restaurants", async(req,res)=>   {
-   console.log(req.body);
    try {
       const {rows} = await db.query("INSERT INTO restaurants(name, location, price_range) VALUES ($1, $2, $3) returning *",
       [req.body.name, req.body.location, req.body.price_range]);
@@ -72,7 +72,6 @@ app.post("/api/v1/restaurants", async(req,res)=>   {
 });
 
 app.put("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
-   console.log(req.body);
    try {
       const {rows} = await db.query("UPDATE restaurants SET name = $1, location=$2, price_range=$3 where id = $4 returning *",
       [req.body.name, req.body.location, req.body.price_range, req.params.restaurant_id]);
@@ -87,7 +86,6 @@ app.put("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
 });
 
 app.delete("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
-   console.log(req.body);
    try {
       const {rows} = await db.query("DELETE FROM restaurants WHERE id=$1",
       [req.params.restaurant_id]);

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import RestaurantFinder from "../apis/RestaurantFinder";
 import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,7 +16,7 @@ import Paper from '@material-ui/core/Paper';
 
 
 interface Data {
-   name:string;
+  name:string;
   location: string;
   price_range: number;
   ratings: number;
@@ -30,6 +31,7 @@ function createData(
   return { name, location, price_range, ratings };
 }
 
+// change this for an API call
 const rows = [
   createData('Cupcake', "New York", 3.7, 67),
   createData('Donut', "Dublin", 25.0, 51),
@@ -37,6 +39,24 @@ const rows = [
   createData('Frozen yoghurt', "Udi", 6.0, 24),
   createData('Gingerbread', "Rio de Janeiro", 16.0, 49)
 ];
+
+
+const RestaurantList = ()=>{
+  console.log("Fetching data...");
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      try {
+        const response = await RestaurantFinder.get("/")
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+}
+
+
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -193,6 +213,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function RestaurantTable() {
+  RestaurantList();
+
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
