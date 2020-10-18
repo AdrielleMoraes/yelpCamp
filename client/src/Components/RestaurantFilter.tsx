@@ -41,17 +41,16 @@ function RestaurantFilter() {
       <form noValidate autoComplete="off">
          <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={3}>
-               <TextField id="outlined-basic" label="Name" variant="outlined" />
+               <TextField label="Name" variant="outlined" />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-               <TextField id="outlined-basic" label="Location" variant="outlined" />
+               <TextField label="Location" variant="outlined" />
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
                <FormControl variant="outlined" >
-                  <InputLabel id="demo-simple-select-outlined-label">Price Range</InputLabel>
+                  <InputLabel>Price Range</InputLabel>
                   <Select
                      className={classes.select}
-                     labelId="demo-simple-select-outlined-label"
                      variant="outlined"
                      value={price}
                      onChange={handleChange}
@@ -67,7 +66,7 @@ function RestaurantFilter() {
             <Grid item xs={12} sm={6} md={3} lg={2}>
                <Rating
                   className={classes.rating}
-                  name="simple-controlled"
+                  name="rating"
                   value={value}
                   onChange={(event, newValue) => {
                      setValue(newValue);
