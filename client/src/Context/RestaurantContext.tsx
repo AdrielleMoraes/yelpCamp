@@ -1,47 +1,30 @@
-import React, {useState, createContext, FunctionComponent } from "react";
+import React, {useState, createContext } from "react";
 
 
 
 type Props = {
-   children: React.ReactNode
+   children: React.ReactNode;
  };
 
-type RestaurantProps = {
-   id: number,
-   name: string,
-   location: string,
-   price_range: number,
-   rating: number
+type RestaurantContextType = {
+   restaurants: string;
+   setRestaurants: (value: string) => void;
 }
 
-const defaultRestaurant: RestaurantProps = {
-   id: 0,
-   name: "First",
-   location: "Ireland",
-   price_range: 3,
-   rating: 4
-};
+const defaultRestaurant = "Default";
 
-export const RestaurantContext = createContext(defaultRestaurant);
+export const RestaurantContext = createContext<RestaurantContextType|undefined>(undefined);
 
 export const RestaurantContextProvider = ({children}: Props) =>{
 
    const [restaurants, setRestaurants] = useState(defaultRestaurant);
 
-   React.useEffect(() => {
-      // We'd get the restaurants from a web API / local storage 
-      const currentRestaurant = {
-         id: 0,
-         name: "First",
-         location: "Ireland",
-         price_range: 3,
-         rating: 4
-      };
+   React.useEffect(()=>{
+      const currentRestaurant = "First";
       setRestaurants(currentRestaurant);
-    }, []);
-
+   },[]);
    return(
-      <RestaurantContext.Provider value={restaurants}>
+      <RestaurantContext.Provider value={{restaurants, setRestaurants}}>
          {children}
       </RestaurantContext.Provider>
    )
