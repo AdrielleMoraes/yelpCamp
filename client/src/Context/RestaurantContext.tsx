@@ -16,11 +16,11 @@ type Props = {
 
 type RestaurantContextType = {
    restaurants: Array<Restaurant>;
-   //setRestaurants: (value: string) => void;
+   // setRestaurants: (restaurants: Array<Restaurant>) => void;
 }
 
 
-export const RestaurantContext = createContext<RestaurantContextType|null>(null);
+export const RestaurantContext = createContext<Partial<RestaurantContextType>>({});
 
 export const RestaurantContextProvider = ({children}: Props) =>{
 
@@ -30,7 +30,7 @@ export const RestaurantContextProvider = ({children}: Props) =>{
       setRestaurants([]);
    },[]);
    return(
-      <RestaurantContext.Provider value={{restaurants, setRestaurants}}>
+      <RestaurantContext.Provider value={{restaurants}}>
          {children}
       </RestaurantContext.Provider>
    )

@@ -42,14 +42,14 @@ const rows = [
 ];
 
 
-const RestaurantList = (props: any)=>{
-  const {restaurants, setRestaurants} = useContext(RestaurantContext);
+const RestaurantList = ()=>{
+  const {restaurants} = useContext(RestaurantContext);
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
 
       try {
         const response = await RestaurantFinder.get("/")
-        setRestaurants(response.data.data.restaurants);
+        //setRestaurants(response.data.data.restaurants);
         console.log(response);
       } catch (error) {
         console.log(error);
