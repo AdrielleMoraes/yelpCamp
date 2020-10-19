@@ -6,22 +6,28 @@ type Props = {
    children: React.ReactNode;
  };
 
+ type Restaurant = {
+    id: number,
+    name: string,
+    location: string,
+    price_range: number,
+    rating: number
+ }
+
 type RestaurantContextType = {
-   restaurants: string;
-   setRestaurants: (value: string) => void;
+   restaurants: Array<Restaurant>;
+   //setRestaurants: (value: string) => void;
 }
 
-const defaultRestaurant = "Default";
 
-export const RestaurantContext = createContext<RestaurantContextType|undefined>(undefined);
+export const RestaurantContext = createContext<RestaurantContextType|null>(null);
 
 export const RestaurantContextProvider = ({children}: Props) =>{
 
-   const [restaurants, setRestaurants] = useState(defaultRestaurant);
+   const [restaurants, setRestaurants] = useState([]);
 
    React.useEffect(()=>{
-      const currentRestaurant = "First";
-      setRestaurants(currentRestaurant);
+      setRestaurants([]);
    },[]);
    return(
       <RestaurantContext.Provider value={{restaurants, setRestaurants}}>

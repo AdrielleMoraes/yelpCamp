@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import RestaurantFinder from "../apis/RestaurantFinder";
 import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -12,6 +12,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import { RestaurantContext } from '../Context/RestaurantContext';
 
 
 
@@ -41,12 +42,14 @@ const rows = [
 ];
 
 
-const RestaurantList = ()=>{
-  console.log("Fetching data...");
+const RestaurantList = (props: any)=>{
+  const {restaurants, setRestaurants} = useContext(RestaurantContext);
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
+
       try {
         const response = await RestaurantFinder.get("/")
+        setRestaurants(response.data.data.restaurants);
         console.log(response);
       } catch (error) {
         console.log(error);
