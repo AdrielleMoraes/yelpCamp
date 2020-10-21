@@ -36,7 +36,7 @@ function createData(
 const rows = [
   createData('Cupcake', "New York", 3.7, 67),
   createData('Donut', "Dublin", 25.0, 51),
-  createData('Eclair', "Athlone", 16.0, 24),
+  createData('Eclair', "Ireland", 16.0, 24),
   createData('Frozen yoghurt', "Udi", 6.0, 24),
   createData('Gingerbread', "Rio de Janeiro", 16.0, 49)
 ];
