@@ -8,7 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// setup routes
 
+//retrieve all items from database
 app.get("/api/v1/restaurants", async(req,res)=>{
    try{
       const { rows } = await db.query('SELECT * FROM restaurants');
@@ -29,6 +31,7 @@ app.get("/api/v1/restaurants", async(req,res)=>{
 
 });
 
+//retrieve one item from database
 app.get("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
    const restaurant_id = req.params.restaurant_id;
    try{
@@ -58,6 +61,8 @@ app.get("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
 
 });
 
+
+// add new item to database
 app.post("/api/v1/restaurants", async(req,res)=>   {
    try {
       const {rows} = await db.query("INSERT INTO restaurants(name, location, price_range) VALUES ($1, $2, $3) returning *",
@@ -71,6 +76,7 @@ app.post("/api/v1/restaurants", async(req,res)=>   {
    }
 });
 
+// edit item in database
 app.put("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
    try {
       const {rows} = await db.query("UPDATE restaurants SET name = $1, location=$2, price_range=$3 where id = $4 returning *",
@@ -85,6 +91,8 @@ app.put("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
    }
 });
 
+
+//delete item from database
 app.delete("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
    try {
       const {rows} = await db.query("DELETE FROM restaurants WHERE id=$1",
@@ -103,6 +111,7 @@ app.delete("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
 });
 
 
+//start server
 const port = process.env.PORT || 3001;
 
 app.listen(port, ()=>{
