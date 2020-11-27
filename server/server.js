@@ -48,7 +48,7 @@ app.get("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
       else{
          res.status(500).json({
             status:"error",
-            message:"Didn't find any restaurant with this id"
+            message:"Didn't find any restaurant with this ID"
          });
       }
    }
@@ -105,7 +105,7 @@ app.delete("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
    } catch (error) {
       res.status(500).json({
          status:"error",
-         message:"Restaurant not found"
+         message:"Restaurant not found!"
       });
    }
 });
@@ -115,5 +115,5 @@ app.delete("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
 const port = process.env.PORT || 3001;
 
 app.listen(port, ()=>{
-   console.log(`Server is up on port ${port}`);
+   console.log(`Server is up on port ${port}... `);
 })
