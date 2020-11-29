@@ -18,7 +18,7 @@ function Header() {
          <div className="jumbotron jumbotron-fluid">
             <div className="container">
                <h1 className="display-4">Restaurant Finder</h1>
-               <p className="lead">Get a little taste of the world</p>
+               <p className="lead">Get a little taste of life</p>
             </div>
          </div>
       </div>
