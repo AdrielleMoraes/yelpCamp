@@ -3,7 +3,7 @@ import React from 'react'
 function RestaurantDetailPage() {
    return (
       <div>
-         RestaurantDetailPage
+         RestaurantDetailPage with restaurant information
       </div>
    )
 }
