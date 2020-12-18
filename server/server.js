@@ -48,7 +48,7 @@ app.get("/api/v1/restaurants/:restaurant_id", async(req,res)=>   {
       else{
          res.status(500).json({
             status:"error",
-            message:"Didn't find any restaurant with this ID"
+            message:"Didn't find any restaurant with the same ID"
          });
       }
    }
