@@ -11,7 +11,7 @@ app.use(express.json());
 // setup routes
 
 //retrieve all items from database
-app.get("/api/v1/restaurants", async(req,res)=>{
+app.get("/api/v1/products", async(req,res)=>{
    try{
       const { rows } = await db.query('SELECT * FROM restaurants');
       res.status(200).json({
